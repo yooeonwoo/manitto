@@ -1,0 +1,155 @@
+/* Import Pretendard Font */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Toss-like Colors */
+  --toss-black: #191F28;
+  --toss-grey-900: #191F28;
+  --toss-grey-800: #333D4B;
+  --toss-grey-700: #4E5968;
+  --toss-grey-600: #6B7684;
+  --toss-grey-500: #8B95A1;
+  --toss-grey-400: #B0B8C1;
+  --toss-grey-300: #D1D6DB;
+  --toss-grey-200: #E5E8EB;
+  --toss-grey-100: #F2F4F6;
+  --toss-white: #FFFFFF;
+  --toss-blue: #3182F6;
+  --toss-red: #F04452;
+
+  /* Enhanced Liquid Glass Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  /* Slightly more visible for depth */
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: 50px;
+  /* Deep blur */
+
+  /* Pure Background */
+  --bg-pure: #F9FAFB;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  /* Apply Pretendard as primary font */
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: var(--toss-grey-900);
+  background: #F2F4F6;
+  /* Subtle mesh gradient for depth */
+  background-image:
+    radial-gradient(at 10% 10%, rgba(255, 255, 255, 0.9) 0px, transparent 60%),
+    radial-gradient(at 90% 10%, rgba(230, 240, 255, 0.6) 0px, transparent 60%),
+    radial-gradient(at 90% 90%, rgba(255, 255, 255, 0.9) 0px, transparent 60%),
+    radial-gradient(at 10% 90%, rgba(240, 245, 255, 0.6) 0px, transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Enhanced 3D Glass Utility Classes */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  /* Multi-layered shadow for 3D lift */
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    /* Inner rim */
+    inset 0 1px 20px rgba(255, 255, 255, 0.5);
+  /* Inner glow */
+  border-radius: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Stronger glossy reflection */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  /* Top half reflection */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  border-radius: 32px 32px 100% 100% / 20px;
+  /* Curved reflection */
+}
+
+.glass-panel>* {
+  position: relative;
+  z-index: 1;
+}
+
+.glass-button {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  /* Button specific 3D shadow */
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.05),
+    inset 0 2px 5px rgba(255, 255, 255, 1),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.02);
+  color: var(--toss-blue);
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 9999px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.glass-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8));
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    inset 0 2px 5px rgba(255, 255, 255, 1);
+}
+
+.glass-button:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  color: var(--toss-grey-900);
+  border-radius: 20px;
+  padding: 16px 20px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.03),
+    0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--toss-blue);
+  box-shadow:
+    0 0 0 4px rgba(49, 130, 246, 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
