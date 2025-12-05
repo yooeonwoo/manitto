@@ -46,7 +46,7 @@ export default function AdminPage() {
         const { data, error } = await supabase
             .from('rounds')
             .select('*')
-            .eq('name', '킹컴퍼니 연말 시상식')
+            .eq('name', '놀이댕산 마니또')
             .single();
 
         if (data) {
@@ -232,7 +232,7 @@ export default function AdminPage() {
             <div className="max-w-4xl mx-auto space-y-6">
                 <header className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-2xl font-bold text-[var(--toss-grey-900)]">킹컴퍼니 연말 시상식</h1>
+                        <h1 className="text-2xl font-bold text-[var(--toss-grey-900)]">놀이댕산 마니또</h1>
                         <p className="text-sm text-[var(--toss-grey-500)]">관리자 대시보드</p>
                     </div>
                     <GlassButton size="sm" variant="secondary" onClick={() => setIsAuthenticated(false)}>로그아웃</GlassButton>
@@ -411,8 +411,8 @@ export default function AdminPage() {
                                         <div
                                             key={p.id}
                                             className={`p-3 rounded-xl border flex items-center gap-3 ${isAssigned
-                                                    ? 'bg-green-50 border-green-200'
-                                                    : 'bg-white/40 border-white/60'
+                                                ? 'bg-green-50 border-green-200'
+                                                : 'bg-white/40 border-white/60'
                                                 }`}
                                         >
                                             {p.image_url ? (

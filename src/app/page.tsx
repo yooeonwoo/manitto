@@ -12,7 +12,7 @@ export default function LandingPage() {
       <GlassCard className="z-10 w-full max-w-md text-center py-12 px-8 flex flex-col items-center gap-8">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-[var(--toss-grey-900)] animate-fade-in-up">
-            킹컴퍼니<br />연말 시상식
+            놀이댕산<br />마니또
           </h1>
           <p className="text-lg text-[var(--toss-grey-600)] animate-fade-in-up delay-100">
             서로의 비밀 마니또가 되어<br />

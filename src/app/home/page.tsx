@@ -108,7 +108,7 @@ export default function HomePage() {
         <main className="flex min-h-screen flex-col items-center justify-center p-6 relative overflow-hidden">
             <div className="w-full max-w-md space-y-6 z-10">
                 <header className="flex justify-between items-center px-2">
-                    <h1 className="text-2xl font-bold text-[var(--toss-grey-900)]">킹컴퍼니 연말 시상식</h1>
+                    <h1 className="text-2xl font-bold text-[var(--toss-grey-900)]">놀이댕산 마니또</h1>
                     <button onClick={handleLogout} className="text-sm text-[var(--toss-grey-600)] hover:text-[var(--toss-grey-900)]">
                         로그아웃
                     </button>
