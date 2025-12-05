@@ -249,8 +249,8 @@ export default function AdminPage() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === tab.id
-                                    ? 'bg-[var(--toss-blue)] text-white shadow-md'
-                                    : 'bg-white/40 text-[var(--toss-grey-600)] hover:bg-white/60'
+                                ? 'bg-[var(--toss-blue)] text-white shadow-md'
+                                : 'bg-white/40 text-[var(--toss-grey-600)] hover:bg-white/60'
                                 }`}
                         >
                             {tab.label}
@@ -380,30 +380,62 @@ export default function AdminPage() {
                     {!loading && activeTab === 'assignments' && (
                         <div className="space-y-6">
                             <div className="flex justify-between items-center">
-                                <h3 className="font-bold">현재 배정 현황</h3>
-                                <div className="text-sm text-[var(--toss-grey-500)]">
-                                    배정은 각 사용자가 로그인 시 개별적으로 진행됩니다.
+                                <div>
+                                    <h3 className="font-bold">배정 현황</h3>
+                                    <p className="text-sm text-[var(--toss-grey-500)]">
+                                        {assignments.length}명 배정 완료 / {participants.length}명 참가자
+                                    </p>
                                 </div>
+                                <GlassButton
+                                    size="sm"
+                                    variant="secondary"
+                                    onClick={async () => {
+                                        if (!confirm('정말 모든 배정을 초기화하시겠습니까? 모든 참가자가 다시 마니또를 뽑아야 합니다.')) return;
+                                        if (!roundId) return;
+                                        await supabase.from('assignments').delete().eq('round_id', roundId);
+                                        fetchAssignments();
+                                        alert('배정이 초기화되었습니다.');
+                                    }}
+                                    disabled={assignments.length === 0}
+                                >
+                                    전체 초기화
+                                </GlassButton>
                             </div>
 
-                            {assignments.length === 0 ? (
-                                <div className="text-center text-[var(--toss-grey-500)] py-8">
-                                    아직 배정된 내역이 없습니다.
-                                </div>
-                            ) : (
-                                <div className="space-y-2">
-                                    {assignments.map((a) => (
-                                        <div key={a.id} className="p-4 bg-white/40 rounded-xl border border-white/60 flex flex-col gap-2">
-                                            <div className="flex justify-between items-center">
-                                                <span className="font-bold text-[var(--toss-blue)]">{(a.participant as any)?.name}</span>
-                                                <span className="text-[var(--toss-grey-400)]">➔</span>
-                                                <span className="font-bold text-[var(--toss-red)]">{(a.target as any)?.name}</span>
-                                            </div>
-                                            <div className="text-sm text-[var(--toss-grey-700)] bg-white/30 p-2 rounded-lg">
-                                                미션: {(a.mission as any)?.content}
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                {participants.map((p) => {
+                                    const isAssigned = assignments.some(
+                                        (a) => (a.participant as any)?.name === p.name
+                                    );
+                                    return (
+                                        <div
+                                            key={p.id}
+                                            className={`p-3 rounded-xl border flex items-center gap-3 ${isAssigned
+                                                    ? 'bg-green-50 border-green-200'
+                                                    : 'bg-white/40 border-white/60'
+                                                }`}
+                                        >
+                                            {p.image_url ? (
+                                                <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-full object-cover border border-white/50" />
+                                            ) : (
+                                                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold">
+                                                    {p.name.charAt(0)}
+                                                </div>
+                                            )}
+                                            <div className="flex-1 min-w-0">
+                                                <div className="font-medium text-sm truncate">{p.name}</div>
+                                                <div className={`text-xs ${isAssigned ? 'text-green-600' : 'text-[var(--toss-grey-400)]'}`}>
+                                                    {isAssigned ? '✓ 배정 완료' : '대기중'}
+                                                </div>
                                             </div>
                                         </div>
-                                    ))}
+                                    );
+                                })}
+                            </div>
+
+                            {participants.length === 0 && (
+                                <div className="text-center text-[var(--toss-grey-500)] py-8">
+                                    참가자를 먼저 추가해주세요.
                                 </div>
                             )}
                         </div>
