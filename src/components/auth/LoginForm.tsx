@@ -22,7 +22,7 @@ export function LoginForm() {
             const { data: rounds } = await supabase
                 .from('rounds')
                 .select('id')
-                .eq('name', '킹컴퍼니 연말 시상식')
+                .eq('name', '놀이댕산 마니또')
                 .single();
 
             if (rounds) {
@@ -72,7 +72,7 @@ export function LoginForm() {
     return (
         <GlassCard className="w-full max-w-md p-8">
             <h2 className="text-2xl font-bold text-center mb-6 text-[var(--toss-grey-900)]">
-                킹컴퍼니 연말 시상식<br />로그인
+                놀이댕산 마니또<br />로그인
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
